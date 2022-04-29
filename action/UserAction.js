@@ -48,7 +48,7 @@ export const dangKyAction = (thongTinNguoiDung) => {
     return async dispatch => {
         try {
             const result = await quanLyNgDungService.dangKyTaiKhoan(thongTinNguoiDung);
-            localStorage.setItem(ACCESSTOKEN,result.data.accessToken)
+            localStorage.setItem(ACCESSTOKEN,result.data.key)
             history.push('/login'); // chuyen ve trang chu
             alert('Your account has been successfully registed! Please login to use our website ... ');
 
@@ -63,7 +63,6 @@ export const dangKyAction = (thongTinNguoiDung) => {
 export const dangNhapAction = (thongTinDangNhap) => {
     return async dispatch => {
         try {
-            console.log("!!!",thongTinDangNhap)
             const result = await quanLyNgDungService.dangNhapTaiKhoan(thongTinDangNhap);
             // dua len Reducer
             dispatch({
@@ -71,8 +70,8 @@ export const dangNhapAction = (thongTinDangNhap) => {
                 userLogin:result.data
             })
             // luu du lieu vao LocalStorage
-            localStorage.setItem(USER_LOGIN, JSON.stringify(result.data));
-            localStorage.setItem(ACCESSTOKEN, result.data.accessToken);
+            localStorage.setItem(USER_LOGIN, JSON.stringify(thongTinDangNhap));
+            localStorage.setItem(ACCESSTOKEN, result.data.key);
             // dong thoi quay lai trang truoc do
             history.goBack();
             // history.push('/'); 
@@ -127,13 +126,39 @@ export const datVeAction = (thongTinDatVe) =>{
     }
 }
 
-export const layThongTinAction = (taiKhoan)=>{
+
+
+// export const layThongTinAction = (taiKhoan)=>{
+//     return async dispatch => {
+//         try{
+//             const result = await axios({
+//                 url:`${DOMAIN}/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
+//                 method:'POST',
+//                 data:{taiKhoan:taiKhoan},
+
+//                 // phan nay de API xac nhan da dang nhap
+//                 headers:{
+//                     'Authorization':`Bearer ${localStorage.getItem(ACCESSTOKEN)}`
+//                 }
+//             });
+//             // gửi thông tin lên redux
+//             dispatch({
+//                 type:THONG_TIN_TAI_KHOAN,
+//                 thongTinTaiKhoan:result.data
+//             })
+
+//         }catch (err){
+//             alert(err.response?.data);
+//         }
+//     }
+// }
+
+export const layThongTinAction = ()=>{
     return async dispatch => {
         try{
             const result = await axios({
-                url:`${DOMAIN}/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
-                method:'POST',
-                data:{taiKhoan:taiKhoan},
+                url:`${DOMAIN}/api/LichSuDatVe`,
+                method:'GET',
 
                 // phan nay de API xac nhan da dang nhap
                 headers:{
@@ -151,6 +176,7 @@ export const layThongTinAction = (taiKhoan)=>{
         }
     }
 }
+
 
 export const capNhatThongTinTaiKhoan = (thongTinTaiKhoan) => {
     return async dispatch => {

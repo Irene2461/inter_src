@@ -15,8 +15,8 @@ export default function Login(props) {
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues:{
-            taiKhoan:'',
-            matKhau:''
+            username:'',
+            password:''
         },
         onSubmit:(values) => {
             // gui thong tin dang nhap ve backend
@@ -32,10 +32,10 @@ export default function Login(props) {
                 </NavLink>
                 
                 <div className="form-group">
-                    <input className="form-control" name="taiKhoan" placeholder="Username" onChange={formik.handleChange} />
+                    <input className="form-control" name="username" placeholder="Username" onChange={formik.handleChange} />
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control" name="matKhau" placeholder="Password" onChange={formik.handleChange} />
+                    <input type="password" className="form-control" name="password" placeholder="Password" onChange={formik.handleChange} />
                 </div>
                 <div className="form-group mt-4">
                     <button className="btnLog mr-2">Log in</button>

@@ -23,6 +23,9 @@ export class QuanLyPhimService extends baseService {
     themPhim = (data) => {
         return this.post('/api/QuanLyPhim/ThemPhimUploadHinh',data);
     }
+    themLichSu = (data) => {
+        return this.post('/api/QuanLyLichSu/Them',data);
+    }
     layThongTinCumRapTheoHeTHong = (maHeThongRap) => {
         return this.get2(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`)
     }

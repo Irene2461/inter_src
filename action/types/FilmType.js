@@ -11,3 +11,5 @@ export const SET_CHI_TIET_CUM_RAP = 'SET_CHI_TIET_CUM_RAP';
 export const SET_USER = 'SET_USER';
 export const TIM_KIEM_USER = 'TIM_KIEM_USER';
 export const DANG_XUAT = 'DANG_XUAT';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';

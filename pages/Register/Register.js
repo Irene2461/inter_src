@@ -29,7 +29,6 @@ export default function Register(props) {
         onSubmit: (values) => {
             
             // dua du lieu len API
-            console.log(values)
             const action = dangKyAction(values);
             dispatch(action);
         }

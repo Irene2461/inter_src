@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { layChiTietPhongVe } from '../../action/FilmAction';
+import { layChiTietPhongVe, themLichSuAction } from '../../action/FilmAction';
 // su dung thu vien lodash
 import _ from 'lodash';
 import { USER_LOGIN } from '../../util/setting';
@@ -32,14 +32,14 @@ export default function Checkout(props) {
     }, [])
 
     // kiểm tra đăng nhập rồi mới cho thao tác
-    // if (!localStorage.getItem(USER_LOGIN)) {
-    //     alert('ban can phai dang nhap');
-    //     return <Redirect to='/login' />
-    // }
-    if (!userLogin.taiKhoan){
-        alert("You have to login first !");
+    if (!localStorage.getItem(USER_LOGIN)) {
+        alert('ban can phai dang nhap');
         return <Redirect to='/login' />
     }
+    // if (!userLogin.username){
+    //     alert("You have to login first !");
+    //     return <Redirect to='/login' />
+    // }
 
     // render ra hệ thống ghế ngồi
     const renderGhe = () => {
@@ -77,7 +77,7 @@ export default function Checkout(props) {
             <div className="row">
                 <div className="col-8 mt-5">
                     <div className="text-center">
-                        <img className="w-100" src="https://tix.vn/app/assets/img/icons/screen.png" alt="movie" />
+                        <img className="w-100" src="/img/screen.png" alt="movie" />
                         {renderGhe()}
                     </div>
                     <div className="row ml-2 mt-4">
@@ -147,15 +147,24 @@ export default function Checkout(props) {
                             'maLichChieu': chiTietPhongVe.thongTinPhim.maLichChieu,
                             'danhSachGhe': chiTietPhongVe.danhSachGhe
                         }
+                        let thongTinLichSu = {
+                            'giaVe': danhSachGheDangDat.reduce((tongTien, gheDD, index) => {
+                                return tongTien += gheDD.giaVe;
+                            }, 0).toLocaleString(),
+                            'danhSachMaGhe': danhSachGheDangDat.gheDD,
+                            'lichChieu':  thongTinPhim?.ngayChieu + thongTinPhim?.gioChieu
+
+                        }
                         if (danhSachGheDangDat.length > 0){
                             dispatch(datVeAction(thongTinDatVe));
+                            dispatch(themLichSuAction(thongTinLichSu));
                             history.replace(`/payment/${props.match.params.id}`);
                         }else alert('You have to choose seat !!!');
                     }}>
                         <div className="display-5 py-2" >BOOK TICKET</div>
                     </div>
                     <div className="checkout-button-buy mt-3" onClick={()=>{
-                        history.replace(`/useraccount/${userLogin.taiKhoan}`);
+                        history.replace(`/u`);
                     }}>
                         <div className="display-5 py-2">BOOKING DETAIL</div>
                     </div>

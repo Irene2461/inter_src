@@ -15,6 +15,7 @@ import Search from './pages/Search/Search';
 import { createBrowserHistory} from 'history';
 import HomeTemplate from './templates/HomeTemplates/HomeTemplate';
 import UserTemplate from './templates/UserTemplates/UserTemplate';
+import UserAccount from './pages/UserAccount/UserAccount';
 export const history = createBrowserHistory();
 
   
@@ -31,6 +32,7 @@ function App() {
         <HomeTemplate exact path="/menu" component={Menu} />
         <HomeTemplate exact path="/payment/:id" component={Payment} />
         <HomeTemplate exact path="/timkiem/:id" component={Search}/>
+        <HomeTemplate exact path="/u" component={UserAccount}/>
         <HomeTemplate component={Homes} />
       </Switch>
     </Router>

@@ -97,6 +97,16 @@ export const themPhimAction = (formData) =>{
     }
 }
 
+export const themLichSuAction = (formData) =>{
+    return async dispatch =>{
+        try{
+            const result = await quanLyPhimService.themLichSu(formData);
+        }catch (err){
+            console.log(err.response?.data)
+        }
+    }
+}
+
 
 export const xoaPhimAction = (maPhim) => {
     return async dispatch =>{

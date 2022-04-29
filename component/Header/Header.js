@@ -5,11 +5,13 @@ import _ from 'lodash';
 import { history } from '../../App';
 import { DANG_XUAT } from '../../action/types/FilmType';
 import "./styleHeader.css";
+import { USER_LOGIN } from '../../util/setting';
 
 export default function Header(props){
     const dispatch = useDispatch();
     let { userLogin } = useSelector(state => state.UserReducer);
-
+    
+    
     const onSubmit = (e) => {
         e.preventDefault();
         let searchKey = document.getElementById("input-search").value;
@@ -50,21 +52,11 @@ export default function Header(props){
                             <div className="btnLog mr-1"><NavLink activeClassName="text-danger" className="nav-link font-weight-nomal text-center" style={{ color: 'white' }} to="/login">Log in</NavLink></div>
                             <div className="btnLog"><NavLink className="nav-link font-weight-nomal text-center" style={{ color: 'white' }} to="/register">Register</NavLink></div>
                         </div> : <div className="dropdown btn-user">
-                            {/* <NavLink className=" nav-link font-weight-bold text-danger" to="/" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {userLogin.taiKhoan}
-                            </NavLink> */}
                             <button className="btn btn-warning font-weight-bold text-white" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {userLogin.taiKhoan}
+                                {userLogin.username ? userLogin.username : "Hello!"}
                             </button>
                             {/* các chức năng của người dùng */}
                             <div className="dropdown-menu">
-                                {/* <button type="button" className="dropdown-item btn-user-event" onClick={()=>{
-                                    history.replace(`/useraccount/${userLogin.taiKhoan}`)
-                                }} >Information</button> */}
-                                {/* nếu user là admin thì hiển thị thêm chức năng đi tới trang admin */}
-                                {/* {(userLogin.maLoaiNguoiDung === "QuanTri") ? <button type="button" className="dropdown-item btn-user-event" onClick={()=>{
-                                    history.replace('/admin');
-                                }}>Go to Admin Page</button> : ''} */}
                                 {/* thực hiện chức năng đăng xuất */}
                                 <button type="button" className="dropdown-item btn-user-event" onClick={()=>{
                                     localStorage.clear();
