@@ -50,7 +50,7 @@ export default function Checkout(props) {
             // moi lan render ra 1 ghe dem kiem tra xem cos trung voi ghe dang dat ko
             let classGheDangDat = '';
             let classGheMinhDat = '';
-            if (ghe.taiKhoanNguoiDat === userLogin.taiKhoan) {
+            if (ghe.taiKhoanNguoiDat === userLogin.username) {
                 classGheMinhDat = 'gheMinhDat';
             }
 
@@ -135,13 +135,16 @@ export default function Checkout(props) {
                     {/* <NavLink exact to ='/payment' style={{width: '100%'}} className="btn btn-danger">PAYMENT</NavLink> */}
                     <div className="checkout-button-buy" onClick={() => {
                         for (var item of danhSachGheDangDat) {
+                            var danhSachGheLichSu = []
                             for (var chair of chiTietPhongVe.danhSachGhe){
                                 if (item.maGhe == chair.maGhe) {
-                                    chair.taiKhoanNguoiDat = userLogin.taiKhoan;
+                                    chair.taiKhoanNguoiDat = userLogin.username;
                                     chair.daDat = true;
+
                                     break;
                                 }
                             }
+                            danhSachGheLichSu.push(item['tenGhe'])
                         }
                         let thongTinDatVe = {
                             'maLichChieu': chiTietPhongVe.thongTinPhim.maLichChieu,
@@ -150,9 +153,9 @@ export default function Checkout(props) {
                         let thongTinLichSu = {
                             'giaVe': danhSachGheDangDat.reduce((tongTien, gheDD, index) => {
                                 return tongTien += gheDD.giaVe;
-                            }, 0).toLocaleString(),
-                            'danhSachMaGhe': danhSachGheDangDat.gheDD,
-                            'lichChieu':  thongTinPhim?.ngayChieu + thongTinPhim?.gioChieu
+                            }, 0),
+                            'danhSachMaGhe': danhSachGheLichSu.toString(),
+                            'lichChieu': chiTietPhongVe.thongTinPhim.maLichChieu
 
                         }
                         if (danhSachGheDangDat.length > 0){

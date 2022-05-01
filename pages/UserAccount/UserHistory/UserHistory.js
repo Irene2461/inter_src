@@ -7,20 +7,21 @@ function UserHistory(props) {
     
     // render Trang chi tiết lịch sử đặt vé
     const renderVeDaDat = () => {
-        return props.thongTinTaiKhoanUpdate.thongTinDatVe?.map((item, index) => {
+        console.log(props.thongTinTaiKhoanUpdate)
+        return Object.keys(props.thongTinTaiKhoanUpdate)?.map((item, index) => {
             // do không có đủ dữ liệu từ API nên hình ảnh và địa chỉ sẽ được render tĩnh
             return <div className="row mb-4" key={index}>
                 <div className="col-3">
                     <div className="img-animation">
                         <img className="card-img-top w-100" src="https://picsum.photos/100/100" alt="movie" />
-                        <h6 className="text-white text-center mt-3">{item.tenPhim}</h6>
+                        <h6 className="text-white text-center mt-3">{item.giaVe}</h6>
                         <NavLink to="/">
                             <div className="animation-overlay"></div>
                         </NavLink>
                     </div>
                 </div>
                 <div className="col-8 chiTietRap">
-                    {item.danhSachGhe.map((chiTietVe, index) => {                                           
+                    {/* {item.danhSachGhe.map((chiTietVe, index) => {                                           
                         return <div key={index} className="mb-3 ml-3">
                             <div className="row">
                                 <div className="col-lg-1 col-sm-2 mr-3">    
@@ -35,7 +36,8 @@ function UserHistory(props) {
                                 <p className="text-white">Ngày đặt: {item.ngayDat?.slice(0, 10)} - Giờ chiếu: {item.ngayDat?.slice(12, 16)} - {chiTietVe.tenRap} - Ghế: {chiTietVe.tenGhe}</p>
                             </div>
                         </div>
-                    })}
+                    })} */}
+                    {item.danhSachMaGhe}{item.maLichchieu}
                 </div>
             </div>
         })
